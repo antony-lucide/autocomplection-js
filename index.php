@@ -1,20 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Engine</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="scripts.js" defer></script>
-</head>
-<body>
-    <header>
-        <h1>Moteur de Recherche</h1>
-        <form action="recherche.php" method="get">
-            <input type="text" name="search" id="search-bar" placeholder="Recherchez ici..." autocomplete="off">
-            <button type="submit">Rechercher</button>
-        </form>
-        <div id="suggestions"></div>
-    </header>
-</body>
-</html>
+<?php
+
+require_once __DIR__ . '/src/Config/db.php';
+require_once __DIR__ . '/src/Controllers/SearchController.php';
+require_once __DIR__ . '/src/Controllers/ElementController.php';
+
+// Initialiser la connexion PDO
+$pdo = getDatabaseConnection();
+
+// Dispatcher les requêtes
+$controller = $_GET['controller'] ?? 'search';
+$action = $_GET['action'] ?? 'index';
+
+if ($controller === 'search') {
+    $searchController = new SearchController($pdo);
+
+    if ($action === 'index') {
+        $searchController->index();
+    } elseif ($action === 'search') {
+        $query = $_GET['query'] ?? '';
+        $searchController->search($query);
+    }
+} elseif ($controller === 'element') {
+    $elementController = new ElementController($pdo);
+
+    if ($action === 'show') {
+        $id = $_GET['id'] ?? 0;
+        $elementController->show($id);
+    }
+} else {
+    echo "Page non trouvée.";
+}

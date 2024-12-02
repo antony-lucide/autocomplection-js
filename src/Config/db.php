@@ -2,7 +2,7 @@
 
 function getDatabaseConnection() {
     $host = 'localhost';
-    $dbname = 'autocomplection';
+    $dbname = 'moteur_recherche';
     $username = 'root';
     $password = '';
 
