@@ -1,18 +1,18 @@
 <?php
 
-require_once __DIR__ . '/src/Config/db.php';
-require_once __DIR__ . '/src/Controllers/SearchController.php';
-require_once __DIR__ . '/src/Controllers/ElementController.php';
+require_once __DIR__ . '/vendor/autoload.php';  // Inclure l'autoloader de Composer
+
+use App\Config\Database;  // Importer la classe Database
 
 // Initialiser la connexion PDO
-$pdo = getDatabaseConnection();
+$pdo = Database::getConnection();
 
 // Dispatcher les requêtes
 $controller = $_GET['controller'] ?? 'search';
 $action = $_GET['action'] ?? 'index';
 
 if ($controller === 'search') {
-    $searchController = new SearchController($pdo);
+    $searchController = new App\Controllers\SearchController($pdo);
 
     if ($action === 'index') {
         $searchController->index();
@@ -21,7 +21,7 @@ if ($controller === 'search') {
         $searchController->search($query);
     }
 } elseif ($controller === 'element') {
-    $elementController = new ElementController($pdo);
+    $elementController = new App\Controllers\ElementController($pdo);
 
     if ($action === 'show') {
         $id = $_GET['id'] ?? 0;

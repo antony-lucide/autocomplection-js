@@ -1,15 +1,7 @@
 {
-    "name": "vendor/script.js",
     "autoload": {
         "psr-4": {
-            "Vendor\\ScriptJs\\": "src/"
+            "App\\": "src/"
         }
-    },
-    "authors": [
-        {
-            "name": "antony-lucide",
-            "email": "antony.lucide@laplateforme.io"
-        }
-    ],
-    "require": {}
+    }
 }
