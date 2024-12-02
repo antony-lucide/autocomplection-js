@@ -1,0 +1,15 @@
+{
+    "name": "vendor/script.js",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\ScriptJs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "antony-lucide",
+            "email": "antony.lucide@laplateforme.io"
+        }
+    ],
+    "require": {}
+}
